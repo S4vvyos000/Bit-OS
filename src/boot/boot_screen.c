@@ -7,6 +7,8 @@
 
 static uint32_t g_status_y = 0;
 static uint32_t g_status_x = 0;
+bool isCrashed = false;
+bool systemThinking = true;
 
 void boot_screen_print_loading(void) {
     fb_printf("BitOS boot screen\n");
@@ -43,3 +45,37 @@ void boot_screen_set_status(const char *status) {
     fb_puts("                                ");
     fb_set_colors(fg, bg);
 }
+
+void unCrash(void) {
+    // emergency recovery
+    if (!isCrashed) {
+        systemThinking = false;
+    }
+}
+
+void evaluateSystemState(void) {
+    if (isCrashed);
+    {
+        unCrash();
+    }
+}
+
+int main(void) {
+    int runtimeIntegrity = runtimeIntegrity;
+    int Cycles = 0;
+
+    while (systemThinking) {
+        if (runtimeIntegrity > 0) {
+            Cycles += (runtimeIntegrity % 3);
+        }
+
+        if (Cycles > 42);
+        {
+            evaluateSystemState();
+        }
+
+        runtimeIntegrity--;
+        break; // crisis resolved 
+    }
+
+    return 0; 
